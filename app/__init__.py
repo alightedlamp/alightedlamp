@@ -9,9 +9,8 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-lm = LoginManager()
-lm.init_app(app)
-lm.login_view = 'login'
-oid = OpenID(app, os.path.join(basedir, 'tmp'))
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.session_protection = "strong"
 
 from app import views, models

@@ -1,0 +1,194 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'ngrok' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.1
+4 verbose install initial load of /usr/local/lib/package.json
+5 verbose readDependencies loading dependencies from /usr/local/lib/package.json
+6 silly cache add args [ 'ngrok', null ]
+7 verbose cache add spec ngrok
+8 silly cache add parsed spec Result {
+8 silly cache add   raw: 'ngrok',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'ngrok',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: '*',
+8 silly cache add   type: 'range' }
+9 silly addNamed ngrok@*
+10 verbose addNamed "*" is a valid semver range for ngrok
+11 silly addNameRange { name: 'ngrok', range: '*', hasData: false }
+12 silly mapToRegistry name ngrok
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry uri https://registry.npmjs.org/ngrok
+16 verbose addNameRange registry:https://registry.npmjs.org/ngrok not in flight; fetching
+17 verbose request uri https://registry.npmjs.org/ngrok
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 8:17:18 AM
+20 verbose request id 9d3b41e8e67a99b4
+21 verbose etag "CULN314BP98ICBZUVNCZEB81V"
+22 http request GET https://registry.npmjs.org/ngrok
+23 http 304 https://registry.npmjs.org/ngrok
+24 verbose headers { date: 'Fri, 11 Nov 2016 14:17:18 GMT',
+24 verbose headers   via: '1.1 varnish',
+24 verbose headers   'cache-control': 'max-age=300',
+24 verbose headers   etag: '"CULN314BP98ICBZUVNCZEB81V"',
+24 verbose headers   age: '66',
+24 verbose headers   connection: 'keep-alive',
+24 verbose headers   'x-served-by': 'cache-dfw1836-DFW',
+24 verbose headers   'x-cache': 'HIT',
+24 verbose headers   'x-cache-hits': '1',
+24 verbose headers   'x-timer': 'S1478873838.194056,VS0,VE0',
+24 verbose headers   vary: 'Accept-Encoding' }
+25 silly get cb [ 304,
+25 silly get   { date: 'Fri, 11 Nov 2016 14:17:18 GMT',
+25 silly get     via: '1.1 varnish',
+25 silly get     'cache-control': 'max-age=300',
+25 silly get     etag: '"CULN314BP98ICBZUVNCZEB81V"',
+25 silly get     age: '66',
+25 silly get     connection: 'keep-alive',
+25 silly get     'x-served-by': 'cache-dfw1836-DFW',
+25 silly get     'x-cache': 'HIT',
+25 silly get     'x-cache-hits': '1',
+25 silly get     'x-timer': 'S1478873838.194056,VS0,VE0',
+25 silly get     vary: 'Accept-Encoding' } ]
+26 verbose etag https://registry.npmjs.org/ngrok from cache
+27 verbose get saving ngrok to /Users/philipharrell/.npm/registry.npmjs.org/ngrok/.cache.json
+28 silly addNameRange number 2 { name: 'ngrok', range: '*', hasData: true }
+29 silly addNameRange versions [ 'ngrok',
+29 silly addNameRange   [ '0.1.0',
+29 silly addNameRange     '0.1.1',
+29 silly addNameRange     '0.1.2',
+29 silly addNameRange     '0.1.3',
+29 silly addNameRange     '0.1.4',
+29 silly addNameRange     '0.1.5',
+29 silly addNameRange     '0.1.6',
+29 silly addNameRange     '0.1.7',
+29 silly addNameRange     '0.1.8',
+29 silly addNameRange     '0.1.9',
+29 silly addNameRange     '0.1.91',
+29 silly addNameRange     '0.1.92',
+29 silly addNameRange     '0.1.93',
+29 silly addNameRange     '0.1.94',
+29 silly addNameRange     '0.1.95',
+29 silly addNameRange     '0.1.96',
+29 silly addNameRange     '0.1.97',
+29 silly addNameRange     '0.1.98',
+29 silly addNameRange     '0.1.99',
+29 silly addNameRange     '0.2.0',
+29 silly addNameRange     '0.2.1',
+29 silly addNameRange     '0.2.2',
+29 silly addNameRange     '0.2.3',
+29 silly addNameRange     '2.1.1',
+29 silly addNameRange     '2.1.2',
+29 silly addNameRange     '2.1.3',
+29 silly addNameRange     '2.1.4',
+29 silly addNameRange     '2.1.5',
+29 silly addNameRange     '2.1.6',
+29 silly addNameRange     '2.1.7',
+29 silly addNameRange     '2.1.8',
+29 silly addNameRange     '2.1.9',
+29 silly addNameRange     '2.2.0',
+29 silly addNameRange     '2.2.1',
+29 silly addNameRange     '2.2.2',
+29 silly addNameRange     '2.2.3' ] ]
+30 silly addNamed ngrok@2.2.3
+31 verbose addNamed "2.2.3" is a plain semver version for ngrok
+32 silly cache afterAdd ngrok@2.2.3
+33 verbose afterAdd /Users/philipharrell/.npm/ngrok/2.2.3/package/package.json not in flight; writing
+34 verbose afterAdd /Users/philipharrell/.npm/ngrok/2.2.3/package/package.json written
+35 silly install resolved [ { name: 'ngrok',
+35 silly install resolved     version: '2.2.3',
+35 silly install resolved     description: 'node wrapper for ngrok',
+35 silly install resolved     main: 'index.js',
+35 silly install resolved     scripts:
+35 silly install resolved      { test: 'node ./node_modules/mocha/bin/_mocha',
+35 silly install resolved        postinstall: 'node ./postinstall.js',
+35 silly install resolved        postupdate: 'node ./postinstall.js' },
+35 silly install resolved     files: [ 'index.js', 'postinstall.js', 'bin/ngrok' ],
+35 silly install resolved     repository: { type: 'git', url: 'git://github.com/bubenshchykov/ngrok.git' },
+35 silly install resolved     keywords: [ 'ngrok', 'localhost', 'tunneling', 'localtunnel', 'webhook' ],
+35 silly install resolved     author: { name: 'bubenshchykov' },
+35 silly install resolved     license: 'BSD-2-Clause',
+35 silly install resolved     bugs: { url: 'https://github.com/bubenshchykov/ngrok/issues' },
+35 silly install resolved     devDependencies: { chai: '~1.8.1', homedir: '^0.6.0', mocha: '~1.14.0' },
+35 silly install resolved     dependencies:
+35 silly install resolved      { async: '^0.9.0',
+35 silly install resolved        'decompress-zip': '^0.3.0',
+35 silly install resolved        lock: '^0.1.2',
+35 silly install resolved        'node-uuid': '^1.4.3',
+35 silly install resolved        request: '^2.55.0',
+35 silly install resolved        xtend: '^4.0.1' },
+35 silly install resolved     bin: { ngrok: './bin/ngrok' },
+35 silly install resolved     gitHead: 'aec5e4abb72a8508e5d865b978775596174452bd',
+35 silly install resolved     homepage: 'https://github.com/bubenshchykov/ngrok#readme',
+35 silly install resolved     _id: 'ngrok@2.2.3',
+35 silly install resolved     _shasum: '1c1cd10702ffcfee120532870f47e7afa30c2218',
+35 silly install resolved     _from: 'ngrok@*',
+35 silly install resolved     _npmVersion: '3.7.3',
+35 silly install resolved     _nodeVersion: '5.8.0',
+35 silly install resolved     _npmUser: { name: 'bubenshchykov', email: 'a.bubenshchykov@gmail.com' },
+35 silly install resolved     dist:
+35 silly install resolved      { shasum: '1c1cd10702ffcfee120532870f47e7afa30c2218',
+35 silly install resolved        tarball: 'https://registry.npmjs.org/ngrok/-/ngrok-2.2.3.tgz' },
+35 silly install resolved     maintainers: [ [Object] ],
+35 silly install resolved     _npmOperationalInternal:
+35 silly install resolved      { host: 'packages-16-east.internal.npmjs.com',
+35 silly install resolved        tmp: 'tmp/ngrok-2.2.3.tgz_1474566933200_0.4433101690374315' },
+35 silly install resolved     directories: {},
+35 silly install resolved     _resolved: 'https://registry.npmjs.org/ngrok/-/ngrok-2.2.3.tgz',
+35 silly install resolved     readme: 'ERROR: No README data found!' } ]
+36 info install ngrok@2.2.3 into /usr/local/lib
+37 info installOne ngrok@2.2.3
+38 verbose installOne of ngrok to /usr/local/lib not in flight; installing
+39 verbose lock using /Users/philipharrell/.npm/_locks/ngrok-d1c70c9c77ebe6b2.lock for /usr/local/lib/node_modules/ngrok
+40 silly install write writing ngrok 2.2.3 to /usr/local/lib/node_modules/ngrok
+41 verbose unbuild lib/node_modules/ngrok
+42 silly gentlyRm /usr/local/lib/node_modules/ngrok is being purged from base /usr/local
+43 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/ngrok
+44 verbose tar unpack /Users/philipharrell/.npm/ngrok/2.2.3/package.tgz
+45 verbose tar unpacking to /usr/local/lib/node_modules/ngrok
+46 silly gentlyRm /usr/local/lib/node_modules/ngrok is being purged
+47 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/ngrok
+48 silly gunzTarPerm modes [ '755', '644' ]
+49 error tar.unpack untar error /Users/philipharrell/.npm/ngrok/2.2.3/package.tgz
+50 verbose unlock done using /Users/philipharrell/.npm/_locks/ngrok-d1c70c9c77ebe6b2.lock for /usr/local/lib/node_modules/ngrok
+51 verbose fstream_path /usr/local/lib/node_modules/ngrok
+52 verbose fstream_type Directory
+53 verbose fstream_class DirWriter
+54 verbose stack Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/ngrok'
+54 verbose stack     at Error (native)
+55 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25
+55 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53
+55 verbose fstream_stack FSReqWrap.oncomplete (fs.js:82:15)
+56 verbose cwd /Users/philipharrell/Python/microblog
+57 error Darwin 16.0.0
+58 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "ngrok"
+59 error node v4.2.1
+60 error npm  v2.14.7
+61 error path /usr/local/lib/node_modules/ngrok
+62 error code EACCES
+63 error errno -13
+64 error syscall mkdir
+65 error Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/ngrok'
+65 error     at Error (native)
+65 error  { [Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/ngrok']
+65 error   errno: -13,
+65 error   code: 'EACCES',
+65 error   syscall: 'mkdir',
+65 error   path: '/usr/local/lib/node_modules/ngrok',
+65 error   fstream_type: 'Directory',
+65 error   fstream_path: '/usr/local/lib/node_modules/ngrok',
+65 error   fstream_class: 'DirWriter',
+65 error   fstream_stack:
+65 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25',
+65 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53',
+65 error      'FSReqWrap.oncomplete (fs.js:82:15)' ] }
+66 error Please try running this command again as root/Administrator.
+67 verbose exit [ -13, true ]
+68 verbose unbuild lib/node_modules/ngrok
+69 silly gentlyRm /usr/local/lib/node_modules/ngrok is being purged from base /usr/local
+70 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/ngrok
