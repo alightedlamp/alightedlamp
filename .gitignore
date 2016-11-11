@@ -6,4 +6,4 @@ app/static/.DS_Store
 .DS_Store
 *.pyc
 node_modules/
-
+flask
