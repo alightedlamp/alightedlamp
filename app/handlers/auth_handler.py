@@ -1,7 +1,5 @@
 import flask
-
 from requests_oauthlib import OAuth2Session
-
 from config import Auth
 
 
