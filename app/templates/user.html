@@ -2,19 +2,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <table>
-      <tr valign="top">
-          <td><img src="{{ user.avatar(128) }}"></td>
-          <td>
-              <h1>User: {{ user.nickname }}</h1>
-              {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-              {% if user.last_seen %}<p><i>Last seen on: {{ user.last_seen }}</i></p>{% endif %}
-              {% if user.id == g.user.id %}<p><a href="{{ url_for('edit') }}">Edit</a></p>{% endif %}
-          </td>
-      </tr>
-  </table>
+<div class="container">
+    <div class="col-md-2 col-sm-2">
+        <img class="img-responsive" src="{{ user.avatar }}"/>
+    </div>
+    <div class="col-md-10 col-sm-10">
+      <h1>{{ user.nickname }}</h1>
+      {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+      {% if user.last_seen %}<p><em>Last seen: {{ momentjs(user.last_seen).calendar() }}</em></p>{% endif %}
+      <p>{{ user.followers.count() }} followers |
+          {% if user.id == g.user.id %}
+              <a href="{{ url_for('edit') }}">Edit</a></p>
+           {% elif not g.user.is_following(user) %}
+              <a href="{{ url_for('follow', nickname=user.nickname) }}">Follow</a>
+          {% else %}
+              <a href="{{ url_for('unfollow', nickname=user.nickname) }}">Unfollow</a>
+          {% endif %}
+      </p>
+    </div>
+</div>
+<div class="container">
   <hr>
-  {% for post in posts %}
-      {% include 'post.html' %}
-  {% endfor %}
+    {% for post in posts.items %}
+        {% include 'post.html' %}
+    {% endfor %}
+</div>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        {% if posts.has_prev %}
+          <li>
+              <a href="{{ url_for('user', nickname=user.nickname, page=posts.prev_num) }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+          </li>
+          {% else %}
+            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+        {% endif %}
+
+        {% if posts.has_next %}
+          <li>
+            <a href="{{ url_for('user', nickname=user.nickname, page=posts.next_num) }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% else %}
+            <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        {% endif %}
+      </ul>
+    </nav>
 {% endblock %}

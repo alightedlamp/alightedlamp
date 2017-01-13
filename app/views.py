@@ -2,35 +2,26 @@ import flask
 from flask import render_template, flash, redirect, session, url_for, request, g, session as flask_session
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, login_manager
+from forms import EditForm, PostForm
+from models import User, Post
 from .models import User
 from .forms import EditForm
 from .handlers.auth_handler import get_google_auth
 from config import Auth
+from config import POSTS_PER_PAGE
 from urllib2 import HTTPError
 from datetime import datetime
 import json
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+@app.route('/index/<int:page>', methods=['GET', 'POST'])
 @login_required
-def index():
-    user = g.user
-    posts = [
-        {
-            'author': {'nickname': 'Ryan'},
-            'title': 'Nice affect, bro',
-            'body': 'Some stuff about labyrinths and how they aren\'t the same thing as mazes'
-        },
-        {
-            'author': {'nickname': 'Kevin'},
-            'title': 'Talkin\' bout the weather',
-            'body': 'Making art in the countryside'
-        }
-    ]
+def index(page=1):
+    posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
     return render_template('index.html',
-        title='Home',
-        user=user,
-        posts=posts)
+                           title='Home',
+                           posts=posts)
 
 @login_manager.user_loader
 def load_user(id):
@@ -87,9 +78,12 @@ def callback():
             user_data = resp.json()
             email = user_data['email']
             user = User.query.filter_by(email=email).first()
+            user.avatar = user_data['picture']
+            nickname = user_data['name'] or user_data['email'].split('@')[0].capitalize()
+            nickname = User.make_unique_nickname(nickname)
             if user is None:
                 user = User(
-                    nickname=user_data['name'] or user_data['email'].split('@')[0].capitalize(),
+                    nickname=nickname,
                     email=email,
                     avatar=user_data['picture']
                 )
@@ -106,32 +100,96 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/user/<nickname>')
+@app.route('/user/<nickname>/<int:page>')
 @login_required
-def user(nickname):
+def user(nickname, page=1):
     user = User.query.filter_by(nickname=nickname).first()
-    if user == None:
-        flash('User %s not found.' % nickname)
+    if user is None:
+        flash('User %s not found.' % nickname, 'alert-warning')
         return redirect(url_for('index'))
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
     return render_template('user.html',
                            user=user,
                            posts=posts)
 
+# how to query for all users?
+@app.route('/users')
+def users():
+    users = User.query.all()
+    return render_template('users.html',
+                           users=users)
+
 @app.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit():
-    form = EditForm()
+    form = EditForm(g.user.nickname)
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data
         g.user.about_me = form.about_me.data
         db.session.add(g.user)
         db.session.commit()
-        flash('Your changes have been saved.')
+        flash('Your changes have been saved.', 'alert-success')
         return redirect(url_for('edit'))
     else:
         form.nickname.data = g.user.nickname
         form.about_me.data = g.user.about_me
     return render_template('edit.html', form=form)
+
+@app.route('/new', methods=['GET', 'POST'])
+@login_required
+def new():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user, title=form.title.data)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!', 'alert-success')
+        return redirect(url_for('index'))
+    return render_template('new.html', form=form)
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500
+
+@app.route('/follow/<nickname>')
+@login_required
+def follow(nickname):
+    user = User.query.filter_by(nickname=nickname).first()
+    if user is None:
+        flash('User %s not found.' % nickname, 'alert-warning')
+        return redirect(url_for('index'))
+    if user == g.user:
+        flash('You can\'t follow yourself!', 'alert-warning')
+        return redirect(url_for('user', nickname=nickname))
+    u = g.user.follow(user)
+    if u is None:
+        flash('Cannot follow ' + nickname + '.', 'alert-warning')
+        return redirect(url_for('user', nickname=nickname))
+    db.session.add(u)
+    db.session.commit()
+    flash('You are now following ' + nickname + '!', 'alert-success')
+    return redirect(url_for('user', nickname=nickname))
+
+@app.route('/unfollow/<nickname>')
+@login_required
+def unfollow(nickname):
+    user = User.query.filter_by(nickname=nickname).first()
+    if user is None:
+        flash('User %s not found.' % nickname, 'alert-warning')
+        return redirect(url_for('index'))
+    if user == g.user:
+        flash('You can\'t unfollow yourself!', 'alert-warning')
+        return redirect(url_for('user', nickname=nickname))
+    u = g.user.unfollow(user)
+    if u is None:
+        flash('Cannot unfollow ' + nickname + '.', 'alert-warning')
+        return redirect(url_for('user', nickname=nickname))
+    db.session.add(u)
+    db.session.commit()
+    flash('You have stopped following ' + nickname + '.', 'alert-success')
+    return redirect(url_for('user', nickname=nickname))

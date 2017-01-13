@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Create a new post:</h3>
+<div class="container post-form">
+  <form action="" method="post" name="post">
+      {{ form.hidden_tag() }}
+      <div class="input-group">
+          {{ form.title(size=30, maxlength=30, class_="form-control") }}
+      </div>
+      <div class="input-group">
+          {{ form.post(size=50, maxlength=140, class_="form-control") }}
+      </div>
+      {% for error in form.post.errors %}
+          <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span style="color: red;">[{{ error }}]</span><br>
+          </div>
+      {% endfor %}
+      <div class="input-group">
+          <input type="submit" value="Post!"/>
+      </div>
+  </form>
+</div>
+{% endblock %}

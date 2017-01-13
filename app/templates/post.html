@@ -1,5 +1,12 @@
-<table>
-    <tr valign="top">
-        <td><img src="{{ post.author.avatar(50) }}"></td><td><i>{{ post.author.nickname }} says:</i><br>{{ post.body }}</td>
-    </tr>
-</table>
+<div class="col-md-1 col-sm-1">
+    <img class="img-responsive" src="{{ post.author.avatar }}">
+</div>
+<div class="col-md-11 col-sm-11">
+    <h3>{{ post.title }}</h3>
+    {% if g.user.nickname == post.author.nickname %}
+    {% else %}
+    <h4><a href="{{ url_for('user', nickname=post.author.nickname)}}">{{ post.author.nickname }}</a></h4>
+    {% endif %}
+    <p>{{ momentjs(post.timestamp).fromNow() }}</p>
+    <p>{{ post.body }}</p>
+</div>
