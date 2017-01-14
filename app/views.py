@@ -234,3 +234,7 @@ def unfollow(nickname):
     db.session.commit()
     flash('You have stopped following ' + nickname + '.', 'alert-success')
     return redirect(url_for('user', nickname=nickname))
+
+@app.route('/about')
+def about():
+    return render_template('about.html', title="About")

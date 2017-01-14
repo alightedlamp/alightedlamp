@@ -33,6 +33,9 @@
 								<a href="{{ url_for('new') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New post</a>
 							</li>
 							<li>
+								<a href="{{ url_for('about') }}"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> About</a>
+							</li>
+							<li>
 								<a class="nav-item" href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Logout</a>
 							</li>
 						{% else %}
@@ -64,4 +67,8 @@
 		{% endblock %}
 		</div>
 	</body>
+	<footer>
+		{% block footer %}
+		{% endblock %}
+	</footer>
 </html>

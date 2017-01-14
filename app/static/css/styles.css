@@ -27,16 +27,20 @@ header + nav { clear: both; }
 nav.navbar {
     background-color: #42f480;
     border-radius: 0;
+    border: 0;
     width: 100%;
 }
 nav.navbar ul { float: right; }
+div.profile h2 { margin-top: 0; }
 div.post-form {
     border: 1px;
     border-color: black;
     border-radius: 5px;
     padding: 15px;
 }
-div.avatar {}
+div.avatar img {
+    border-radius: 50%;
+}
 div.post {
     margin-top: 2em;
     display: block;
