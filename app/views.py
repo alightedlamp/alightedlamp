@@ -158,7 +158,7 @@ def view_post(post_id):
     return render_template('view-post.html',
                            post=post)
 
-@app.route('/edit/post/<id>', methods=['GET', 'POST'])
+@app.route('/post/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_post(id):
     post = Post.query.filter_by(id=id).first()
@@ -174,6 +174,19 @@ def edit_post(id):
         form.title.data = post.title
         form.post.data = post.body
     return render_template('edit-post.html', form=form)
+
+@app.route('/post/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def del_post(id):
+    post = Post.query.filter_by(id=id).first()
+    nickname = g.user.nickname
+    if post is None:
+        flash('Post %s not found.' % id, 'alert-warning')
+        return redirect(url_for('user', nickname=nickname))
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted forever.', 'alert-success')
+    return redirect(url_for('user', nickname=nickname))
 
 @app.errorhandler(404)
 def not_found_error(error):
