@@ -107,7 +107,7 @@ def user(nickname, page=1):
     if user is None:
         flash('User %s not found.' % nickname, 'alert-warning')
         return redirect(url_for('index'))
-    posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
+    posts = user.posts.order_by(Post.timestamp.desc()).paginate(page, POSTS_PER_PAGE, False)
     return render_template('user.html',
                            user=user,
                            posts=posts)
@@ -146,6 +146,34 @@ def new():
         flash('Your post is now live!', 'alert-success')
         return redirect(url_for('index'))
     return render_template('new.html', form=form)
+
+# Doesn't work
+@app.route('/post/<post_id>', methods=['GET', 'POST'])
+@login_required
+def view_post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    if post is None:
+        flash('Post %s not found.' % post_id, 'alert-warning')
+        return redirect(url_for('index'))
+    return render_template('view-post.html',
+                           post=post)
+
+@app.route('/edit/post/<id>', methods=['GET', 'POST'])
+@login_required
+def edit_post(id):
+    post = Post.query.filter_by(id=id).first()
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.body = form.post.data
+        db.session.add(post)
+        db.session.commit()
+        flash('Your changes have been saved.', 'alert-success')
+        return redirect(url_for('edit_post', id=post.id))
+    else:
+        form.title.data = post.title
+        form.post.data = post.body
+    return render_template('edit-post.html', form=form)
 
 @app.errorhandler(404)
 def not_found_error(error):

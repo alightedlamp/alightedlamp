@@ -1,5 +1,5 @@
 <div class="post">
-    {% if g.user.nickname != post.author.nickname %}
+    {% if g.user.id != post.author.id %}
     <div class="col-md-1 col-sm-1 avatar">
         {# avatar_none is not working #}
         <img class="img-responsive" src="{% if post.author.avatar %}{{ post.author.avatar }}{% else %}g.user.avatar_none(50){% endif %}">
@@ -7,11 +7,14 @@
     {% endif %}
     <div class="col-md-11 col-sm-11">
         <h3>{{ post.title }}</h3>
-        {% if g.user.nickname == post.author.nickname %}
+        {% if g.user.id == post.author.id %}
         {% else %}
         <h4><a href="{{ url_for('user', nickname=post.author.nickname)}}">{{ post.author.nickname }}</a></h4>
         {% endif %}
         <p>{{ momentjs(post.timestamp).fromNow() }}</p>
         <p>{{ post.body }}</p>
+        {% if g.user.id == post.author.id %}
+            <p><a href="{{ url_for('edit_post', id=post.id) }}">Edit</a></p>
+        {% endif %}
     </div>
 </div>
