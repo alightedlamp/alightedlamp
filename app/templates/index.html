@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     {% for post in posts.items %}
-      <p>
         {% include 'post.html' %}
-      </p>
     {% endfor %}
     <nav aria-label="Page navigation">
       <ul class="pagination">

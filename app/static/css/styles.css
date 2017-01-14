@@ -1,3 +1,32 @@
+body {
+    background-color: #EEE;
+}
+div.content {
+    background-color: white;
+}
+div.logo {
+    float: left;
+}
+h1.title {
+    font-family: 'Overpass Mono', monospace;
+    vertical-align: bottom;
+}
+h1.title a {
+    color: black;
+    text-decoration: none;
+}
+header {
+    margin: 2em 0;
+    height: 4em;
+    border-bottom: 1px;
+    clear: both;
+}
+header + nav { clear: both; }
+nav.navbar {
+    background-color: black;
+    width: 100%;
+}
+nav.navbar ul { float: right; }
 div.post-form {
     border: 1px;
     border-color: black;
@@ -6,9 +35,10 @@ div.post-form {
 }
 div.avatar {}
 div.post {
-    margin: 20px 0
+    margin-top: 2em;
+    clear: both;
 }
 div.post h3 {
-    margin: 0
-    padding: 0
+    margin: 0;
+    padding: 0;
 }

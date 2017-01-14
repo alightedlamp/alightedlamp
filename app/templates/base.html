@@ -7,17 +7,15 @@
 		{% endif %}
 		<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="/static/css/styles.css" rel="stylesheet" media="screen">
+		<link href="https://fonts.googleapis.com/css?family=Overpass+Mono" rel="stylesheet">
     	<script src="http://code.jquery.com/jquery-latest.js"></script>
     	<script src="/static/js/bootstrap.min.js"></script>
 		<script src="/static/js/moment.js"></script>
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-		<div class="container">
-			<header>
-				<h1><a href="/"><i>a lighted lamp</i></a></h1>
-			</header>
-			<nav class="navbar navbar-default">
+		<div class="container content">
+			<nav class="navbar">
 				<div class="container-fluid">
 				  <!-- <div class="navbar-header">
 					  <a class="navbar-brand" href="/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
@@ -43,6 +41,12 @@
 				  </div>
 			  	</div>
 			</nav>
+			<header>
+				<!-- <div class="logo">
+					<img src="/static/img/lamp.png"/>
+				</div> -->
+				<h1 class="title"><a href="/">a lighted lamp</a></h1>
+			</header>
 			{% with messages = get_flashed_messages(with_categories=true) %}
 				{% if messages %}
 					{% for category, message in messages %}
@@ -53,7 +57,7 @@
 				{% endif %}
 			{% endwith %}
 		</div>
-		<div class="container">
+		<div class="container content">
 		{% block content %}
 		{% endblock %}
 		</div>
