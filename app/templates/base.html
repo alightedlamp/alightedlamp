@@ -14,15 +14,18 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-		<div class="container content">
 			<nav class="navbar">
 				<div class="container-fluid">
+				<!--<h1 class="title"><a href="/">a lighted lamp</a></h1>-->
 				  <!-- <div class="navbar-header">
 					  <a class="navbar-brand" href="/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
 				  </div> -->
 				  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						{% if g.user.is_authenticated %}
+							<li>
+								<a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+							</li>
 							<li>
 								<a href="{{ url_for('user', nickname=g.user.nickname) }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ g.user.nickname }}</a>
 							</li>
@@ -41,11 +44,10 @@
 				  </div>
 			  	</div>
 			</nav>
+		<div class="container content">
 			<header>
-				<!-- <div class="logo">
-					<img src="/static/img/lamp.png"/>
-				</div> -->
 				<h1 class="title"><a href="/">a lighted lamp</a></h1>
+				<!-- <h2 class="subtitle"><i>a pointless blog</i></h2> -->
 			</header>
 			{% with messages = get_flashed_messages(with_categories=true) %}
 				{% if messages %}
