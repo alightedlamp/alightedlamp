@@ -16,9 +16,11 @@ import json
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @app.route('/index/<int:page>', methods=['GET', 'POST'])
-@login_required
 def index(page=1):
-    posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+    if g.user.is_authenticated:
+        posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+    else:
+        posts = Post.query.paginate(page, POSTS_PER_PAGE, False)
     return render_template('index.html',
                            title='Home',
                            posts=posts)
