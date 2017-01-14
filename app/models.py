@@ -22,8 +22,9 @@ class User(db.Model):
                                backref=db.backref('followers', lazy='dynamic'),
                                lazy='dynamic')
 
-    #ef avatar(self, size):
-        #return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
+    # not working, unimportant really
+    def avatar_none(self, size):
+       return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
 
     @property
     def is_authenticated(self):

@@ -4,3 +4,11 @@ div.post-form {
     border-radius: 5px;
     padding: 15px;
 }
+div.avatar {}
+div.post {
+    margin: 20px 0
+}
+div.post h3 {
+    margin: 0
+    padding: 0
+}

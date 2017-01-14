@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Hi, {{ g.user.nickname }}! Here's your feed:</h2>
     {% for post in posts.items %}
       <p>
         {% include 'post.html' %}
