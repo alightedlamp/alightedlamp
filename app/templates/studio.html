@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+	<title>The Studio</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/studio.css"/>
+	<script type="text/javascript" src="/static/js/studio.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<header>
+	<h1><i>the<b>Studio</b></i><!--.js <span class="light small ML5">beta</span>--></h1>
+	<h2 class="MT20"><i>Welcome to the studio. You don't need any brushes. Just click some buttons. Feel free to move the painting around on the wall. You are the artist.</i></h2>
+</header>
+<div id="moreinfo">
+	<p class="noind">The three elements of the painting are the solid color background, a middleground composed of Hans Hoffman-esque rectangular &#x201C;figures&#x201D;, and a foreground of the lines and gestures in the painting.</p>
+	<p class="noind MT10">If you aren't feeling creative, the program will make a canvas for you and paint some nice modern lines and shapes. Just click &#x201C;<i>I don't like decisions</i>&#x201D;. It's okay, I don't either. Art is hard. Otherwise, click &#x201C;<i>Rectangles!</i>&#x201D; a few times, and maybe add some lines. It's up to you.</p>
+	<p class="noind MT10">You can view the source code <a href="theStudio.js" target="_blank">here</a>. If you want to know more about me and what I do, <a href="http://www.philipharrell.com">check it</a>.</p>
+</div>
+<section id="controls">
+	<div class="controlPane">
+		<div class="controls_bg"></div>
+		<div class="controls">
+			<div class="options">
+				<form id="userOptions">
+					<h2><label>How big should this thing be?</label></h2>
+					<p class="small MT10" id="warning">Values must be greater than 50 and less than <span id="maxLength">900</span></p>
+					<div id="dimensionsText">
+						<p class="small MT5">Width:</p>
+						<p class="small MT5">Height:</p>
+					</div>
+					<div id="dimensionsInput">
+						 <input id="canvasUserWidth" type="text"/> px
+						 <input id="canvasUserHeight" type="text"/> px
+					 </div>
+				</form>
+			</div>
+			<div class="buttons">
+				<button id="build-stretcher" class="button" onclick="buildStretcher()">Build it!</button>
+				<button class="button" onclick="setBackground()">Background, please</button>
+				<button class="button" onclick="drawRectangles()">Rectangles!</button>
+				<!--<button class="button" onclick="drawTriangle()">Triangles are powerful</button>-->
+				<button class="button" onclick="drawGesture()">Throw a gesture in there</button>
+				<button class="button" onclick="drawLines()">How about some lines?</button>
+				<button class="button" onclick="doEverything()">I don't like decisions</button>
+				<button class="button" onclick="trash()">Trash this garbage!</button>
+			</div>
+			<div class="reset">
+				<form id="resetOptions">
+					<h2><label>Get rid of some of this stuff:</label></h2>
+					<p class="small MT10"><input type="checkbox" id="resetBg"/>Reset background</p>
+					<p class="small MT5"><input type="checkbox" id="resetMg"/>Reset middleground</p>
+					<p class="small MT5"><input type="checkbox" id="resetFg"/>Reset foreground</p>
+				</form>
+				<p class="MT10"><button class="button" id="reset" onclick="reset()">Reset this junk</button></p>
+				<p class="MT10" id="moreinfoText"><a id="moreinfoLink" href="#">Gimmie the deets.</a></p>
+				<!--<p id="nameText"><span class="smaller"><sup>&#x00A9;</sup></span> <a id="portfolioLink" href="../index.html">Philip Harrell 2014</a></p>-->
+			</div>
+			<!--<p class="small MT10"><a id="advancedOptionsLink" href="#">Advanced Options</a></p>
+			<div id="advancedOptions_bg"></div>
+			<form id="advancedOptions">
+				<p class="small MT10"><input type="checkbox" id="linesOneColor"/>Keep lines one color</p>
+				<p class="small MT10"><input type="checkbox" id="fillShapes"/>Fill in the shapes</p>
+				<p class="small MT10"><input type="checkbox" id="fillShapes"/>I don't get abstraction, give me a puppy</p>
+				<p class="MT5"><button class="smallButton MR10" onclick="setAdvanced()">Do it</button><button class="smallButton" onclick="resetAdvanced()">Nevermind</button></p>
+			</form>-->
+		</div>
+	</div>
+</section>
+<section id="studio">
+	<div id="painting">
+		<canvas id="paintingBg" width="450" height="500">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<canvas id="paintingMg" width="450" height="500">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<canvas id="paintingFg" width="450" height="500">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+	</div>
+</section>
+</body>
+</html>

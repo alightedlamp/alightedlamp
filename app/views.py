@@ -276,4 +276,32 @@ def about():
         session['oauth_state'] = state
         return render_template('about.html',
                                title="About",
+                               auth_url=auth_url)\
+
+
+@app.route('/projects')
+def projects():
+    if g.user.is_authenticated:
+        return render_template('projects.html', title="Projects")
+    else:
+        google = get_google_auth()
+        auth_url, state = google.authorization_url(
+            Auth.AUTH_URI, access_type='offline')
+        session['oauth_state'] = state
+        return render_template('projects.html',
+                               title="Projects",
+                               auth_url=auth_url)
+
+
+@app.route('/studio')
+def studio():
+    if g.user.is_authenticated:
+        return render_template('studio.html', title="The Studio")
+    else:
+        google = get_google_auth()
+        auth_url, state = google.authorization_url(
+            Auth.AUTH_URI, access_type='offline')
+        session['oauth_state'] = state
+        return render_template('studio.html',
+                               title="The Studio",
                                auth_url=auth_url)

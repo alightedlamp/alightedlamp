@@ -1,0 +1,264 @@
+/* --- CSS Reset --- */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+/* --- Headings & General Styles --- */
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+	background: url(/static/img/bg_studio.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+ 	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+}
+body {
+	margin: 20px;
+	font-family: "Helvetica", "Arial", "Geneva", sans-serif;
+	font-size: 80%;
+}
+h1 {font-size: 2em;}
+h2 {
+	font-size: 1.25em;
+	margin-top: 20px;
+}
+div h2:first-of-type {margin-top: 0;}
+
+p {line-height: 1.4em;}
+p.ind {
+	text-indent: 20px;
+	text-align: left;
+}
+
+/* --- Sections ---- */
+section#content{}
+
+div.controlPane {
+	width: 300px;
+}
+header {margin-bottom: 2%;}
+footer {
+	position: fixed;
+	width: 100%;
+	bottom: 10px;
+	clear: both;
+	/*font-size: .85em;*/
+}
+footer p + p {margin-top: 5px;}
+footer .right {margin-right: 2%;}
+
+
+/* --- Responsive elements --- */
+div.container {
+	display: block;
+}
+div.container-block {
+	display: inline-block;
+	width: 46%;
+}
+div.container div.container-block:first-of-type {margin-right:1%;}
+
+#moreinfo {
+	font-size: 1.3em;
+	width: 50%;
+	visibility: hidden;
+	position: absolute;
+	left: 25%;
+	top: 20%;
+	background-color: white;
+	border: 5px solid #623825;
+	padding: 25px;
+	clear: both;
+}
+
+
+/* --- Control Pane --- */
+.controls_bg {
+	position: absolute;
+	z-index: 0;
+	top: 110px;
+	left: 20px;
+	width: 300px;
+	height: 630px;
+	background-color: #bbb;
+	opacity: .5;
+}
+@-moz-document url-prefix() {
+	.controls_bg {
+		height: 640px;
+	}
+}
+.controls {
+	position: absolute;
+	z-index: 1;
+	top: 100px;
+	left: 20px;
+	width: 300px;
+	padding: 10px;
+}
+.reset {
+	margin-top: 20px;
+	position: relative;
+}
+.options {
+	position: relative;
+	margin-top: 20px;
+}
+.buttons{
+	position: relative;
+	margin-top: 10px;
+}
+#advancedOptions_bg {
+	position: fixed;
+	background-color: #bbb;
+	opacity: .5;
+	display: none;
+	height: 105px;
+	left: 0px;
+	width: 300px;
+	z-index: 0;
+}
+#advancedOptions {
+	position: fixed;
+	display: none;
+	left: 10px;
+	width: 300px;
+	z-index: 1;
+}
+
+
+/* --- Canvas elements ---- */
+canvas {}
+#studio {
+	position: absolute;
+	left: 325px;
+	z-index: -1;
+}
+#studio#painting {
+
+}
+#painting {
+	position: absolute;
+	left: 10%;
+	top: 3%;
+}
+#paintingBg {
+	border: 5px solid #623825;
+	position: absolute;
+	background-color: white;
+	z-index: 1;
+}
+#paintingMg {
+	border: 5px solid #623825;
+	position: absolute;
+	z-index: 2;
+}
+#paintingFg {
+	border: 5px solid #623825;
+	position: absolute;
+	z-index: 3;
+}
+
+
+/* --- Forms --- */
+button, label {display: block;}
+button {
+	position: relative;
+	border: 0;
+	width: 280px;
+	padding: 10px;
+	font-size: 1.15em;
+	background-color: white;
+}
+button + button {margin-top: 10px;}
+label {margin: 10px 0 0 0;}
+input {margin: 0 10px 5px 0;}
+#dimensionsText {
+	display: inline-block;
+	margin-right: 2%;
+	margin-top: 2px;
+}
+#dimensionsInput {
+	width: 50%;
+	margin-top: 2px;
+	display: inline-block;
+}
+input#canvasUserWidth, input#canvasUserHeight {
+	width: 50px;
+	border: 0;
+	height: 15px;
+}
+
+button.smallButton {
+	width: 135px;
+	display: inline-block;
+}
+
+/*button#reset {
+	width: 150px;
+	font-size: .85em;
+}*/
+
+
+/* ---- Links ---- */
+a:link, a:visited, a:active {
+	color: #555;
+	font-weight: 500;
+	text-decoration: none;
+}
+a:hover {
+	font-weight: 500;
+	text-decoration: underline;
+	color: black;
+}
+
+
+/* ---- Fonts and Colors ---- */
+.MT5 {margin-top: 5px;}
+.MT10 {margin-top: 10px;}
+.MT20 {margin-top: 20px;}
+.MT30 {margin-top: 30px;}
+.MT40 {margin-top: 40px;}
+.MT50 {margin-top: 50px;}
+.MT60 {margin-top: 60px;}
+.MT70 {margin-top: 70px;}
+.MT80 {margin-top: 80px;}
+.MT90 {margin-top: 90px;}
+.MT100 {margin-top: 100px;}
+
+.MR5 {margin-right: 5px;}
+.MR10 {margin-right: 10px;}
+
+.ML5 {margin-left: 2px;}
+
+i {font-style: italic;}
+b {font-weight: bold;}
+i b {font-style: italic;font-weight: bold;}
+small, .small {font-size: 85%;}
+.smaller {font-size: 50%;}
+big, .big {font-size: 125%;}
+.light {
+	font-weight: 100;
+	vertical-align: 1.5px;
+}
+sup {vertical-align: 5px;}
+
+.red {color: red;}
+.black {color: black;}
+.purple {color: #447BC5;}
+
+.right {float: right;}
+.left {float: left;}
+
+
+/* --- Togglable classes ---- */
+.buttonHover {
+	background-color: #447BC5;
+	color: white;
+}
+.visible {visibility: visible;}

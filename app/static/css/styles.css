@@ -1,5 +1,6 @@
 body {
-    background-color: #c1f0ff;
+    /* background-color: #c1f0ff; */
+    background-image: url('/static/img/background.gif');
 }
 div.content {
     background-color: white;
@@ -31,7 +32,43 @@ nav.navbar {
     width: 100%;
 }
 nav.navbar ul { float: right; }
-.navbar-nav>li>a:hover { background-color: #c1f0ff; }
+/* .navbar-nav>li>a { color: #9b2f23; } */
+.navbar-nav>li>a:hover { background-color: #F9DA00; }
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -6em;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  height: 6em;
+}
+.site-footer {
+  background: #46511a;
+  margin-top: 2em;
+  padding: 2em;
+}
+.sm-icon img {
+    width: 30px;
+    margin-right: 1em;
+    background-color: #F9DA00;
+}
+.sm-icon a:hover img {
+    background-color: #F94921;
+}
+.sm-icon:last-child {
+    margin-right: 0;
+}
+div.page-wrap:last-child { padding-bottom: 2me; }
 div.profile h2 { margin-top: 0; }
 div.post-form {
     border: 1px;
@@ -54,9 +91,9 @@ div#about {
     margin-bottom: 4em;
 }
 footer {
-    4em;
+    height: 4em;
     width: 100%;
-    background-color: #7ffcff;
+    background-color: #63482a;
 }
 
 /* Seizure */
