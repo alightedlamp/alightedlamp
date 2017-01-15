@@ -11,12 +11,17 @@ div.logo {
 h1, h2, h3, h4, h5 {
     font-family: 'Overpass Mono', monospace;
 }
+h1.title {
+    padding-bottom: .5em;
+    border-bottom: 3px dashed #eee;
+}
 h1.title a {
     color: black;
     text-decoration: none;
 }
 h2.subtitle {
-    font-size: 1em;
+    padding-bottom: .5em;
+    border-bottom: 3px dashed #eee;
 }
 header {
     margin: 2em 0;
@@ -33,7 +38,14 @@ nav.navbar {
 }
 nav.navbar ul { float: right; }
 /* .navbar-nav>li>a { color: #9b2f23; } */
-.navbar-nav>li>a:hover { background-color: #F9DA00; }
+.navbar-nav>li>a:hover {
+    background-color: #35BEFF;
+     color: white;
+}
+.nav .open>a:hover, .nav .open>a:focus {
+    color: white;
+    background-color: #F94921;
+}
 * {
   margin: 0;
 }
@@ -43,18 +55,17 @@ html, body {
 .page-wrap {
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -6em;
+  margin-bottom: 100px;
 }
 .page-wrap:after {
   content: "";
   display: block;
 }
 .site-footer, .page-wrap:after {
-  height: 6em;
+  height: 100px;
 }
 .site-footer {
   background: #46511a;
-  margin-top: 2em;
   padding: 2em;
 }
 .sm-icon img {
@@ -68,13 +79,10 @@ html, body {
 .sm-icon:last-child {
     margin-right: 0;
 }
-div.page-wrap:last-child { padding-bottom: 2me; }
+div#main { padding-bottom: 1em; }
 div.profile h2 { margin-top: 0; }
-div.post-form {
-    border: 1px;
-    border-color: black;
-    border-radius: 5px;
-    padding: 15px;
+div.avatar {
+    border-right: 1px solid red;
 }
 div.avatar img {
     border-radius: 50%;
@@ -86,9 +94,6 @@ div.post {
 div.post h3 {
     margin: 0;
     padding: 0;
-}
-div#about {
-    margin-bottom: 4em;
 }
 footer {
     height: 4em;

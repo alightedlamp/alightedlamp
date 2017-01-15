@@ -2,19 +2,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Edit Your Profile</h2>
+  <h2>Profile:</h2>
   <form action="" method="post" name="edit">
       {{form.hidden_tag()}}
       <div class="form-group">
-          Username<br />
-          {{ form.nickname(size=24) }}
+         <strong>Nickname:</strong>
+          {{ form.nickname(size=24, class_="form-control", placeholder="Nickname") }}
           {% for error in form.errors.nickname %}
             <br><span style="color: red;">[{{ error }}]</span>
           {% endfor %}
       </div>
-      <div class="input-group">
-          Bio<br />
-          {{ form.about_me(cols=32, rows=4) }}
+      <div class="form-group">
+          <strong>Bio:</strong>
+          {{ form.about_me(cols=32, rows=4, class_="form-control", placeholder="Some stuff about yourself") }}
       </div>
       <div class="input-group">
           <input type="submit" value="Save Changes" class="btn">

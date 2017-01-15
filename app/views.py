@@ -138,9 +138,9 @@ def users():
                            users=users)
 
 
-@app.route('/edit', methods=['GET', 'POST'])
+@app.route('/user/<nickname>/edit', methods=['GET', 'POST'])
 @login_required
-def edit():
+def edit(nickname):
     form = EditForm(g.user.nickname)
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data

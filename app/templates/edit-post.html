@@ -6,17 +6,17 @@
   <form action="" method="post" name="edit">
       {{form.hidden_tag()}}
       <div class="form-group">
-          Title<br />
-          {{ form.title(size=24) }}
+          <strong>Title</strong><br />
+          {{ form.title(size=24, class_="form-control", placeholder="Title") }}
           {% for error in form.errors.nickname %}
             <br><span style="color: red;">[{{ error }}]</span>
           {% endfor %}
       </div>
-      <div class="input-group">
-          Body<br />
-          {{ form.post(cols=32, rows=4) }}
+      <div class="form-group">
+         <strong>Body</strong><br />
+          {{ form.post(cols=32, rows=4, class_="form-control", placeholder="What's going on?") }}
       </div>
-      <div class="input-group">
+      <div class="form-group">
           <input type="submit" value="Save Changes" class="btn">
       </div>
   </form>
