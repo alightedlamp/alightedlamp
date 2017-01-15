@@ -1,5 +1,5 @@
 body {
-    background-color: #EEE;
+    background-color: #c1f0ff;
 }
 div.content {
     background-color: white;
@@ -31,6 +31,7 @@ nav.navbar {
     width: 100%;
 }
 nav.navbar ul { float: right; }
+.navbar-nav>li>a:hover { background-color: #c1f0ff; }
 div.profile h2 { margin-top: 0; }
 div.post-form {
     border: 1px;
@@ -48,4 +49,43 @@ div.post {
 div.post h3 {
     margin: 0;
     padding: 0;
+}
+div#about {
+    margin-bottom: 4em;
+}
+footer {
+    4em;
+    width: 100%;
+    background-color: #7ffcff;
+}
+
+/* Seizure */
+.seizure {
+    width: 100%;
+    height: 400px;
+    padding: 4em;
+    margin 0;
+    background-color: red;
+    animation-name: seizure;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+.seizure p, .seizure h1 {
+    text-align: center;
+}
+/* The animation code */
+@keyframes seizure {
+    0%   {background-color: red;}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    75%  {background-color: purple;}
+    100% {background-color: red;}
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes seizure {
+    0%   {background-color: red;}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    75%  {background-color: green;}
+    100% {background-color: red;}
 }

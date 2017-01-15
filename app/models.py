@@ -6,6 +6,7 @@ followers = db.Table('followers',
                      db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
                      )
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
@@ -24,7 +25,7 @@ class User(db.Model):
 
     # not working, unimportant really
     def avatar_none(self, size):
-       return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
+        return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
 
     @property
     def is_authenticated(self):
@@ -74,6 +75,7 @@ class User(db.Model):
                 break
             version += 1
         return new_nickname
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)

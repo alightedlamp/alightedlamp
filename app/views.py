@@ -19,15 +19,25 @@ import json
 def index(page=1):
     if g.user.is_authenticated:
         posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+        return render_template('index.html',
+                               title='Home',
+                               posts=posts)
     else:
         posts = Post.query.paginate(page, POSTS_PER_PAGE, False)
-    return render_template('index.html',
-                           title='Home',
-                           posts=posts)
+        google = get_google_auth()
+        auth_url, state = google.authorization_url(
+            Auth.AUTH_URI, access_type='offline')
+        session['oauth_state'] = state
+        return render_template('index.html',
+                               title='Home',
+                               posts=posts,
+                               auth_url=auth_url)
+
 
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 @app.before_request
 def before_request():
@@ -37,7 +47,8 @@ def before_request():
         db.session.add(g.user)
         db.session.commit()
 
-@app.route('/login')
+
+'''@app.route('/login')
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -46,6 +57,8 @@ def login():
         Auth.AUTH_URI, access_type='offline')
     session['oauth_state'] = state
     return render_template('login.html', auth_url=auth_url)
+'''
+
 
 @app.route('/gCallback')
 def callback():
@@ -60,7 +73,7 @@ def callback():
             return 'You denied access.'
         return 'Error encountered.'
     if 'code' not in request.args and 'state' not in request.args:
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
     else:
         # Execution reaches here when user has
         # successfully authenticated our app.
@@ -96,10 +109,12 @@ def callback():
             return redirect(url_for('index'))
         return 'Could not fetch your information.'
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 @app.route('/user/<nickname>')
 @app.route('/user/<nickname>/<int:page>')
@@ -114,12 +129,14 @@ def user(nickname, page=1):
                            user=user,
                            posts=posts)
 
+
 # how to query for all users?
 @app.route('/users')
 def users():
     users = User.query.all()
     return render_template('users.html',
                            users=users)
+
 
 @app.route('/edit', methods=['GET', 'POST'])
 @login_required
@@ -137,6 +154,7 @@ def edit():
         form.about_me.data = g.user.about_me
     return render_template('edit.html', form=form)
 
+
 @app.route('/new', methods=['GET', 'POST'])
 @login_required
 def new():
@@ -149,8 +167,8 @@ def new():
         return redirect(url_for('index'))
     return render_template('new.html', form=form)
 
-# Doesn't work
-@app.route('/post/<post_id>', methods=['GET', 'POST'])
+
+@app.route('/post/<post_id>', methods=['GET'])
 @login_required
 def view_post(post_id):
     post = Post.query.filter_by(id=post_id).first()
@@ -160,22 +178,29 @@ def view_post(post_id):
     return render_template('view-post.html',
                            post=post)
 
+
 @app.route('/post/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_post(id):
     post = Post.query.filter_by(id=id).first()
-    form = PostForm()
-    if form.validate_on_submit():
-        post.title = form.title.data
-        post.body = form.post.data
-        db.session.add(post)
-        db.session.commit()
-        flash('Your changes have been saved.', 'alert-success')
-        return redirect(url_for('edit_post', id=post.id))
+    nickname = g.user.nickname
+    if g.user.id == post.user_id:
+        form = PostForm()
+        if form.validate_on_submit():
+            post.title = form.title.data
+            post.body = form.post.data
+            db.session.add(post)
+            db.session.commit()
+            flash('Your changes have been saved.', 'alert-success')
+            return redirect(url_for('edit_post', id=post.id))
+        else:
+            form.title.data = post.title
+            form.post.data = post.body
+        return render_template('edit-post.html', form=form)
     else:
-        form.title.data = post.title
-        form.post.data = post.body
-    return render_template('edit-post.html', form=form)
+        flash('That isn\'t your post!', 'alert-danger')
+        return redirect(url_for('user', nickname=nickname))
+
 
 @app.route('/post/delete/<id>', methods=['GET', 'POST'])
 @login_required
@@ -199,6 +224,7 @@ def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
 
+
 @app.route('/follow/<nickname>')
 @login_required
 def follow(nickname):
@@ -217,6 +243,7 @@ def follow(nickname):
     db.session.commit()
     flash('You are now following ' + nickname + '!', 'alert-success')
     return redirect(url_for('user', nickname=nickname))
+
 
 @app.route('/unfollow/<nickname>')
 @login_required
@@ -237,6 +264,16 @@ def unfollow(nickname):
     flash('You have stopped following ' + nickname + '.', 'alert-success')
     return redirect(url_for('user', nickname=nickname))
 
+
 @app.route('/about')
 def about():
-    return render_template('about.html', title="About")
+    if g.user.is_authenticated:
+        return render_template('about.html', title="About")
+    else:
+        google = get_google_auth()
+        auth_url, state = google.authorization_url(
+            Auth.AUTH_URI, access_type='offline')
+        session['oauth_state'] = state
+        return render_template('about.html',
+                               title="About",
+                               auth_url=auth_url)

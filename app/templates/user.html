@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container profile">
+<div class="row profile">
     <div class="col-md-2 col-sm-2">
         <img class="img-responsive" src="{% if user.avatar %}{{ user.avatar }}{% else %}user.avatar_none(50){% endif %}"/>
     </div>
@@ -21,7 +21,7 @@
       </p>
     </div>
 </div>
-<div class="container">
+<div class="row container">
   <hr>
     {% for post in posts.items %}
         {% include 'post.html' %}
