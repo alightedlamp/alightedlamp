@@ -8,6 +8,8 @@
       <div class="form-group">
          <strong>Nickname:</strong>
           {{ form.nickname(size=24, class_="form-control", placeholder="Nickname") }}
+          {{ form.instagram(size=24, class_="form-control", placeholder="Instagram") }}
+          {{ form.twitter(size=24, class_="form-control", placeholder="Twitter") }}
           {% for error in form.errors.nickname %}
             <br><span style="color: red;">[{{ error }}]</span>
           {% endfor %}

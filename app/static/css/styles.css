@@ -134,3 +134,5 @@ footer {
     75%  {background-color: green;}
     100% {background-color: red;}
 }
+.user-social a { margin-right: 1em; }
+.user-ico { width: 30px; }

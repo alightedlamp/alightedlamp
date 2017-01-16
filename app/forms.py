@@ -5,6 +5,8 @@ from app.models import User
 
 class EditForm(Form):
     nickname = StringField('nickname', validators=[DataRequired()])
+    instagram = StringField('instagram', validators=[Length(min=0, max=20)])
+    twitter = StringField('twitter', validators=[Length(min=0, max=20)])
     about_me = TextAreaField('about_me', validators=[Length(min=0, max=140)])
 
     def __init__(self, original_nickname, *args, **kwargs):

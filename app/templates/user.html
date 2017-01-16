@@ -7,9 +7,15 @@
         <img class="img-responsive" src="{% if user.avatar %}{{ user.avatar }}{% else %}user.avatar_none(50){% endif %}"/>
     </div>
     <div class="col-md-10 col-sm-10">
-      <h2>{{ user.nickname }}</h2>
-      {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-      {% if user.last_seen %}<p><em>Last seen: {{ momentjs(user.last_seen).calendar() }}</em></p>{% endif %}
+      <h2>
+        {{ user.nickname }}
+          <span class="user-social">
+            {% if user.instagram_user %}<a href="http://instagram.com/{{ user.instagram_user }}" target="_blank"><img class="user-ico" src="/static/img/ico-insta.png"/></a></p>{% endif %}
+            {% if user.twitter_user %}<a href="http://twitter.com/{{ user.twitter_user }}" target="_blank"><img class="user-ico" src="/static/img/ico-twit.png">{{ user.twitter_user }}</a>{% endif %}
+          </span>
+      </h2>
+        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+        {% if user.last_seen %}<p><em>Last seen: {{ momentjs(user.last_seen).calendar() }}</em></p>{% endif %}
       <p>{{ user.followers.count() }} followers
           {% if g.user.is_authenticated %}|
               {% if user.id == g.user.id %}

@@ -144,6 +144,8 @@ def edit(nickname):
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data
         g.user.about_me = form.about_me.data
+        g.user.instagram_user = form.instagram.data
+        g.user.twitter_user = form.twitter.data
         db.session.add(g.user)
         db.session.commit()
         flash('Your changes have been saved.', 'alert-success')
@@ -151,6 +153,8 @@ def edit(nickname):
     else:
         form.nickname.data = g.user.nickname
         form.about_me.data = g.user.about_me
+        form.instagram.data = g.user.instagram_user
+        form.twitter.data = g.user.twitter_user
     return render_template('edit.html', form=form)
 
 
