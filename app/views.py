@@ -121,7 +121,7 @@ def logout():
 def user(nickname, page=1):
     user = User.query.filter_by(nickname=nickname).first()
     if user is None:
-        flash('User %s not found.' % nickname, 'alert-warning')
+        flash('User %s not found. :/' % nickname, 'alert-warning')
         return redirect(url_for('index'))
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(page, POSTS_PER_PAGE, False)
     return render_template('user.html',
@@ -148,8 +148,8 @@ def edit(nickname):
         g.user.twitter_user = form.twitter.data
         db.session.add(g.user)
         db.session.commit()
-        flash('Your changes have been saved.', 'alert-success')
-        return redirect(url_for('edit'))
+        flash('Your post has been edited! :)', 'alert-success')
+        return redirect(url_for('user', nickname=nickname))
     else:
         form.nickname.data = g.user.nickname
         form.about_me.data = g.user.about_me
@@ -166,7 +166,7 @@ def new():
         post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user, title=form.title.data)
         db.session.add(post)
         db.session.commit()
-        flash('Your post is now live!', 'alert-success')
+        flash('Your post is now live! :)', 'alert-success')
         return redirect(url_for('index'))
     return render_template('new.html', form=form)
 
@@ -176,7 +176,7 @@ def new():
 def view_post(post_id):
     post = Post.query.filter_by(id=post_id).first()
     if post is None:
-        flash('Post %s not found.' % post_id, 'alert-warning')
+        flash('Post %s not found. :(' % post_id, 'alert-warning')
         return redirect(url_for('index'))
     return render_template('view-post.html',
                            post=post)
@@ -194,14 +194,14 @@ def edit_post(id):
             post.body = form.post.data
             db.session.add(post)
             db.session.commit()
-            flash('Your changes have been saved.', 'alert-success')
+            flash('Your changes have been saved. :)', 'alert-success')
             return redirect(url_for('edit_post', id=post.id))
         else:
             form.title.data = post.title
             form.post.data = post.body
         return render_template('edit-post.html', form=form)
     else:
-        flash('That isn\'t your post!', 'alert-danger')
+        flash('That isn\'t your post! >:O', 'alert-danger')
         return redirect(url_for('user', nickname=nickname))
 
 
@@ -215,7 +215,7 @@ def del_post(id):
         return redirect(url_for('user', nickname=nickname))
     db.session.delete(post)
     db.session.commit()
-    flash('Your post has been deleted forever.', 'alert-success')
+    flash('Your post has been deleted forever. :D', 'alert-success')
     return redirect(url_for('user', nickname=nickname))
 
 @app.errorhandler(404)
@@ -233,10 +233,10 @@ def internal_error(error):
 def follow(nickname):
     user = User.query.filter_by(nickname=nickname).first()
     if user is None:
-        flash('User %s not found.' % nickname, 'alert-warning')
+        flash('User %s not found. :(' % nickname, 'alert-warning')
         return redirect(url_for('index'))
     if user == g.user:
-        flash('You can\'t follow yourself!', 'alert-warning')
+        flash('You can\'t follow yourself! ;)', 'alert-warning')
         return redirect(url_for('user', nickname=nickname))
     u = g.user.follow(user)
     if u is None:
@@ -244,7 +244,7 @@ def follow(nickname):
         return redirect(url_for('user', nickname=nickname))
     db.session.add(u)
     db.session.commit()
-    flash('You are now following ' + nickname + '!', 'alert-success')
+    flash('You are now following ' + nickname + '! :D', 'alert-success')
     return redirect(url_for('user', nickname=nickname))
 
 

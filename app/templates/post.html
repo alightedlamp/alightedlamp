@@ -1,11 +1,11 @@
 <div class="row post">
     {% if g.user.id != post.author.id %}
-    <div class="col-md-1 col-sm-1 avatar">
+    <div class="col-md-1 col-sm-1 col-xs-1 avatar">
         {# avatar_none is not working #}
         <img class="img-responsive" src="{% if post.author.avatar %}{{ post.author.avatar }}{% else %}g.user.avatar_none(50){% endif %}">
     </div>
     {% endif %}
-    <div class="col-md-11 col-sm-11">
+    <div class="col-md-11 col-sm-11 col-xs-11">
         <h3>{{ post.title }}</h3>
         {% if g.user.id == post.author.id %}
         {% else %}
@@ -14,7 +14,9 @@
         <p>{{ momentjs(post.timestamp).fromNow() }}</p>
         <p>{{ post.body }}</p>
         {% if g.user.id == post.author.id %}
-            <p><a href="{{ url_for('edit_post', id=post.id) }}">Edit</a> | <a href="{{ url_for('del_post', id=post.id) }}">Delete</a></p>
+            <p><a href="{{ url_for('edit_post', id=post.id) }}">Edit</a> | <a class="delete-post">Delete</a></p>
         {% endif %}
     </div>
 </div>
+
+{% include "/components/confirm-modal.html" %}
