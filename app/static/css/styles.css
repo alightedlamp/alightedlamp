@@ -2,6 +2,9 @@ body {
     /* background-color: #c1f0ff; */
     background-image: url('/static/img/background.gif');
 }
+p, li {
+    font-family: 'Open Sans', sans-serif;
+}
 div.content {
     background-color: white;
 }

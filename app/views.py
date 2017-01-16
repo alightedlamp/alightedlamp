@@ -18,12 +18,12 @@ import json
 @app.route('/index/<int:page>', methods=['GET', 'POST'])
 def index(page=1):
     if g.user.is_authenticated:
-        posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+        posts = g.user.followed_posts().order_by(Post.timestamp.desc()).paginate(page, POSTS_PER_PAGE, False)
         return render_template('index.html',
                                title='Home',
                                posts=posts)
     else:
-        posts = Post.query.paginate(page, POSTS_PER_PAGE, False)
+        posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, POSTS_PER_PAGE, False)
         google = get_google_auth()
         auth_url, state = google.authorization_url(
             Auth.AUTH_URI, access_type='offline')
@@ -118,7 +118,6 @@ def logout():
 
 @app.route('/user/<nickname>')
 @app.route('/user/<nickname>/<int:page>')
-@login_required
 def user(nickname, page=1):
     user = User.query.filter_by(nickname=nickname).first()
     if user is None:

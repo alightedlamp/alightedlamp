@@ -10,14 +10,16 @@
       <h2>{{ user.nickname }}</h2>
       {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
       {% if user.last_seen %}<p><em>Last seen: {{ momentjs(user.last_seen).calendar() }}</em></p>{% endif %}
-      <p>{{ user.followers.count() }} followers |
-          {% if user.id == g.user.id %}
-              <a href="{{ url_for('edit', nickname=user.nickname) }}">Edit</a></p>
-           {% elif not g.user.is_following(user) %}
-              <a href="{{ url_for('follow', nickname=user.nickname) }}">Follow</a>
-          {% else %}
-              <a href="{{ url_for('unfollow', nickname=user.nickname) }}">Unfollow</a>
-          {% endif %}
+      <p>{{ user.followers.count() }} followers
+          {% if g.user.is_authenticated %}|
+              {% if user.id == g.user.id %}
+                  <a href="{{ url_for('edit', nickname=user.nickname) }}">Edit</a></p>
+               {% elif not g.user.is_following(user) %}
+                  <a href="{{ url_for('follow', nickname=user.nickname) }}">Follow</a>
+              {% else %}
+                  <a href="{{ url_for('unfollow', nickname=user.nickname) }}">Unfollow</a>
+              {% endif %}
+        {% endif %}
       </p>
     </div>
 </div>
