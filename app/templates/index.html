@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
     <h2 class="subtitle">Guestbook</h2>
-    {% for post in posts.items %}
-        {% include 'post.html' %}
-    {% endfor %}
+    {% if posts.items %}
+        {% for post in posts.items %}
+            {% include 'post.html' %}
+        {% endfor %}
+    {% else %}
+    <h3>It's a little quiet over here. Why not <a href="{{ url_for('users') }}">find someone to follow?</a></h3>
+    {% endif %}
     <nav aria-label="Page navigation">
       <ul class="pagination">
         {% if posts.has_prev %}

@@ -132,7 +132,7 @@ def user(nickname, page=1):
 # how to query for all users?
 @app.route('/users')
 def users():
-    users = User.query.all()
+    users = User.query.order_by(User.nickname.asc()).all()
     return render_template('users.html',
                            users=users)
 

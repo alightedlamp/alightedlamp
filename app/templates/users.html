@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for users in users %}
-        <a href="/user/{{ user }}">{{ user }}</a>
+<div class="users-list">
+    {% for user in users %}
+    <div class="row user">
+        <div class="col-md-1 col-sm-1 col-xs-1 avatar">
+            <img class="img-responsive" src="{% if user.avatar %}{{ user.avatar }}{% else %}user.avatar_none(50){% endif %}"/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-1">
+            <a href="/user/{{ user.nickname }}">{{ user.nickname }}</a><br />
+            {{ user.about_me }}<br />
+            Last seen: {{ momentjs(user.last_seen).calendar() }}<br />
+        </div>
+    </div>
     {% endfor %}
+</div>
 {% endblock %}

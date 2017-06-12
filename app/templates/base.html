@@ -44,8 +44,12 @@
 									<li>
 										<a href="{{ url_for('new') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New post</a>
 									</li>
+									<li role="separator" class="divider"></li>
 									<li>
-										<a class="nav-item" href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Logout</a>
+										<a href="{{ url_for('edit', nickname=g.user.nickname) }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a>
+									</li>
+									<li>
+										<a class="nav-item" href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a>
 									</li>
 								</ul>
 							</li>
@@ -78,13 +82,14 @@
 			{% endblock %}
 			</div>
 		</div>
+		<div class="push"></div>
+
+		<script src="/static/js/script.js"></script>
+
+		<footer class="site-footer">
+			<span class="sm-icon"><a href="http://instagram.com/philipharrell" target="_blank"><img src="/static/img/ico-insta.png"/></a></span>
+			<!--<span class="sm-icon"><a href="http://no-thanks.tumblr.com" target="_blank"><img src="/static/img/ico-tumb.png"/></a></span>-->
+			<span class="sm-icon"><a href="https://www.linkedin.com/in/philipharrell" target="_blank"><img src="/static/img/ico-linked.png"/></a></span>
+		</footer>
 	</body>
-
-	<script src="/static/js/script.js"></script>
-
-	<footer class="site-footer">
-		<span class="sm-icon"><a href="http://instagram.com/philipharrell" target="_blank"><img src="/static/img/ico-insta.png"/></a></span>
-		<!--<span class="sm-icon"><a href="http://no-thanks.tumblr.com" target="_blank"><img src="/static/img/ico-tumb.png"/></a></span>-->
-		<span class="sm-icon"><a href="https://www.linkedin.com/in/philipharrell" target="_blank"><img src="/static/img/ico-linked.png"/></a></span>
-	</footer>
 </html>

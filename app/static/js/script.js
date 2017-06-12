@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    /* Delete post confirmation modal */
     $(".delete-post").click(function() {
         console.log("Made it here");
         $("#confirm-modal").css("display", "block");
@@ -15,4 +16,5 @@ $(document).ready(function() {
         }
     }
 
+    /* Seizure banner easter egg */
 });
