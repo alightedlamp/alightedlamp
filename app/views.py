@@ -93,7 +93,7 @@ def callback():
             user_data = resp.json()
             email = user_data['email']
             user = User.query.filter_by(email=email).first()
-            user.avatar = user_data['picture']
+            # user.avatar = user_data['picture']
             nickname = user_data['name'] or user_data['email'].split('@')[0].capitalize()
             nickname = User.make_unique_nickname(nickname)
             if user is None:
